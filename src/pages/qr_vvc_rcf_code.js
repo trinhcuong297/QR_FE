@@ -9,7 +9,7 @@ export default function QR() {
 
   useEffect(() => {
     fetch(
-      `http://localhost:3000/GetAllTask/v23nabfkanxl5234aw654mbafhasdhf452343bwebfsajdchasdcre`
+      `http://195.35.23.226:3000/GetAllTask/v23nabfkanxl5234aw654mbafhasdhf452343bwebfsajdchasdcre`
     )
       .then((res) => res.json())
       .then((data) => {
