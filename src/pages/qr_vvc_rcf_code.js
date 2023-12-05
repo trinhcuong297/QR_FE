@@ -19,7 +19,7 @@ export default function QR() {
 
   return <div className="flex flex-wrap justify-between md:mx-16">
     {Array.isArray(data) ? data?.map((e, index) => {
-      return <div className="px-2">
+      return <div className="px-2" key={index}>
         <Card className="mt-6 w-96 flex flex-col items-center">
           <CardBody>
             <b>{e?.name}</b> - {e?.project_id[1]}
