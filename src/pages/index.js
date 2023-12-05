@@ -26,12 +26,12 @@ export default function Home() {
       password: event.target.Password.value
     }
     setLoading(1);
-    await fetch(`http://195.35.23.226:3000/Login`, {
+    await fetch(`http://195.35.23.226:8080/Login`, {
       method: "POST",
       body: JSON.stringify(Data),
       headers: {
         "content-type": "application/json",
-        "Access-Control-Allow-Origin": "http://195.35.23.226:3000",
+        "Access-Control-Allow-Origin": "http://195.35.23.226:8080",
       }
     })
       .then(res => res.json())
@@ -50,12 +50,12 @@ export default function Home() {
       data: formData
     }
     setSending(1);
-    await fetch(`http://195.35.23.226:3000/Upload`, {
+    await fetch(`http://195.35.23.226:8080/Upload`, {
       method: "POST",
       body: formData,
       headers: {
         // "content-type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "http://195.35.23.226:3000",
+        "Access-Control-Allow-Origin": "http://195.35.23.226:8080",
       }
     })
       .then(res => res.json())
@@ -71,7 +71,7 @@ export default function Home() {
     if (user) {
       dispatch(setLogin())
       fetch(
-        `http://195.35.23.226:3000/GetTask/${user.work_email}`
+        `http://195.35.23.226:8080/GetTask/${user.work_email}`
       )
         .then((res) => res.json())
         .then((data) => {
