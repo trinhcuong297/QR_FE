@@ -133,7 +133,7 @@ export default function Home() {
       <div className="w-full flex flex-col items-center px-2">
         <h1 className="text-3xl font-bold mt-8 text-gray-800">Xin chào {user?.name}</h1>
         {Array.isArray(data) ? data.map((e, index) => {
-          return <Card className={`${codeAccept && e?.access_token == codeAccept ? "" : "hidden"} w-full md:w-3/4 lg:w-1/2 my-4 bg-gray-100`} key={index}>
+          return <Card className={`w-full md:w-3/4 lg:w-1/2 my-4 bg-gray-100`} key={index}>
             <CardBody>
               <h1 className="text-2xl"><b>{e?.name}</b> - {e?.project_id[1]}</h1>
               <p>{e?.portal_user_names}</p>
