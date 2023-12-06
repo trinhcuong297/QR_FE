@@ -116,23 +116,6 @@ export default function Home() {
 
   if (loginState) {
     return <>
-      <div className="w-full flex flex-col items-center px-2">
-        <h1 className="text-3xl font-bold mt-8 text-gray-800">Xin chào {user?.name}</h1>
-        {Array.isArray(data) ? data.map((e, index) => {
-          return <Card className="w-full md:w-3/4 lg:w-1/2 my-4 bg-gray-100" key={index}>
-            <CardBody>
-              <h1 className="text-2xl"><b>{e?.name}</b> - {e?.project_id[1]}</h1>
-              <p>{e?.portal_user_names}</p>
-              <hr className="my-4" />
-              <h4 className="text-md font-medium leadi" dangerouslySetInnerHTML={{
-                __html: e?.description ? e?.description : '',
-              }}
-                suppressHydrationWarning={true}>
-              </h4>
-            </CardBody>
-          </Card>
-        }) : <></>}
-      </div>
       <div className={`flex flex-col items-center ${codeAccept ? "hidden" : ""}`}>
         <div className="w-full md:w-[25rem]">
           <QrScanner
@@ -147,6 +130,24 @@ export default function Home() {
           />
         </div>
       </div>
+      <div className="w-full flex flex-col items-center px-2">
+        <h1 className="text-3xl font-bold mt-8 text-gray-800">Xin chào {user?.name}</h1>
+        {Array.isArray(data) ? data.map((e, index) => {
+          return <Card className={`${codeAccept && e?.access_token == codeAccept ? "" : "hidden"} w-full md:w-3/4 lg:w-1/2 my-4 bg-gray-100`} key={index}>
+            <CardBody>
+              <h1 className="text-2xl"><b>{e?.name}</b> - {e?.project_id[1]}</h1>
+              <p>{e?.portal_user_names}</p>
+              <hr className="my-2" />
+              <h4 className="text-md font-medium leadi" dangerouslySetInnerHTML={{
+                __html: e?.description ? e?.description : '',
+              }}
+                suppressHydrationWarning={true}>
+              </h4>
+            </CardBody>
+          </Card>
+        }) : <></>}
+      </div>
+
       <hr className="my-4" />
       <h1 className="text-4xl font-bold w-full text-center">{formRes}</h1>
       <form onSubmit={handleSubmit}>
