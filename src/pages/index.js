@@ -79,11 +79,6 @@ export default function Home() {
         })
     }
   }, [user, loginState]);
-  useEffect(() => {
-    if (codeAccept && data?.find((e) => e.access_token == codeAccept)?.name) {
-      setQr_active(false)
-    }
-  })
 
   if (!loginState) {
     return <div className="w-full h-screen flex flex-col items-center justify-center">
@@ -142,9 +137,9 @@ export default function Home() {
         <div className="w-full md:w-[25rem]">
           <QrScanner
             onDecode={(result) => {
-              if (result.endsWith("n7af24")) {
+              if (result.endsWith("n7af24") && data?.find((e) => e.access_token == result.slice(0, -6))?.name) {
                 setCodeAccept(result.slice(0, -6))
-                // setData(data.find((e) => { return e?.access_token == result.slice(0, -6) }))
+                setQr_active(false)
               }
             }}
             onError={(error) => console.log(error?.message)}
@@ -155,7 +150,7 @@ export default function Home() {
       <hr className="my-4" />
       <h1 className="text-4xl font-bold w-full text-center">{formRes}</h1>
       <form onSubmit={handleSubmit}>
-        <div className={`${data?.find((e) => e.access_token == codeAccept)?.name ? "" : "hidden"} w-full flex flex-col items-center px-2 my-4`}>
+        <div className={`${codeAccept ? "" : "hidden"} w-full flex flex-col items-center px-2 my-4`}>
           <div className="md:w-3/4 lg:w-1/2 w-full rounded-md bg-gray-100 px-2">
             <h1 className="text-3xl font-bold mt-2 mb-4 text-gray-800">{data?.find((e) => e.access_token == codeAccept)?.name}</h1>
             <input name="user_id" value={user?.id} type="number" hidden />
